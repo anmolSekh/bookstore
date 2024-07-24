@@ -8,13 +8,15 @@ import cors from "cors";
 const app = express() //define the variable for express js
 
 //Cors Policy
-// app.use(cors()) //default
+//default
+app.use(cors()) 
 
-app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-type'],
-}))
+//custom
+// app.use(cors({
+//     origin: 'http://localhost:3000',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-type'],
+// }))
 
 //parse json file
 app.use(express.json());
