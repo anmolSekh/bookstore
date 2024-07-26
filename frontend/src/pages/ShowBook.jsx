@@ -8,14 +8,14 @@ const ShowBook = () => {
   const [book, setBook] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
-
+  // var resp;
   useEffect(() => {
     setLoading(true);
-    console.log(id)
+    // console.log(id)
     axios
       .get(`http://localhost:5555/books/${id}`)
       .then((response) => {
-        setBook(response.data);
+        setBook(response.data.book);
         setLoading(false);
       })
       .catch((error) => {
@@ -23,7 +23,6 @@ const ShowBook = () => {
         setLoading(false);
       });
   }, [])
-
   return (
     <div className='p-4'>
       <BackButton/>
@@ -35,6 +34,7 @@ const ShowBook = () => {
           <div className='my-4'>
             <span className='text-xq mr-4 text-gray-500'>Id</span>
             <span>{book._id}</span>
+            {/* <span>{isEmpty}</span> */}
           </div>
           <div className='my-4'>
             <span className='text-xq mr-4 text-gray-500'>Title</span>
