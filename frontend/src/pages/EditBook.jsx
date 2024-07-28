@@ -20,7 +20,7 @@ const EditBook = () => {
     };
     setLoading(true);
     axios
-      .patch(`http://localhost:5555/books/${id}`, data) //Use patch instead of get -> put ???
+      .patch(`http://localhost:5555/books/${id}`, data) //Use patch instead of get -> put ??? 
       .then((response) => {
         setOldBook(response.data.book);
         setLoading(false);
