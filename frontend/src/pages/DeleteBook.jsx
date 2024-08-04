@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import {useParams} from 'react-router-dom'
+import {useNavigate,useParams} from 'react-router-dom'
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 
 const DeleteBook = () => {
-  const [book, setBook] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
   // var resp;
   const handleDeleteBook = () => {
     setLoading(true);
     axios
-      .delete(`http://localhost:5555/books/${id}`)
+      .delete(`http://localhost:5555/books/${id}`) //Use patch instead of get -> put ??? 
       .then(() => {
+        // setOldBook(response.data.book);
         setLoading(false);
+        navigate('/');
       })
       .catch((error) => {
         setLoading(false);

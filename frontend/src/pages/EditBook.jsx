@@ -8,10 +8,26 @@ const EditBook = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [publishYear, setPublishYear] = useState('');
-  const [oldBook, setOldBook] = useState('');
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setLoading(true);
+    // console.log(id)
+    axios
+      .get(`http://localhost:5555/books/${id}`)
+      .then((response) => {
+        setTitle(response.data.book.title)
+        setAuthor(response.data.book.author)
+        setPublishYear(response.data.book.publishYear)
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, [])
   const handleEditBook = () => {
     const data = {
       title,
@@ -20,9 +36,9 @@ const EditBook = () => {
     };
     setLoading(true);
     axios
-      .patch(`http://localhost:5555/books/${id}`, data) //Use patch instead of get -> put ??? 
-      .then((response) => {
-        setOldBook(response.data.book);
+      .put(`http://localhost:5555/books/${id}`, data) //Use patch instead of get -> put ??? 
+      .then(() => {
+        // setOldBook(response.data.book);
         setLoading(false);
         navigate('/');
       })
@@ -69,7 +85,7 @@ const EditBook = () => {
             />
           </div>
           <button className = 'p-2 bg-sky-300 m-8' onClick={handleEditBook}>
-            Edit
+            Save
           </button>
         </div>
     </div>
