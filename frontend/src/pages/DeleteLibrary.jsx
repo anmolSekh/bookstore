@@ -9,13 +9,12 @@ const DeleteLibrary = () => {
   const [loading, setLoading] = useState(false);
   const [author, setAuthor] = useState('');
   const [publishYear, setPublishYear] = useState('');
-  const { id } = useParams();
   const navigate = useNavigate();
   const {enqueueSnackbar} = useSnackbar()
   const handleDeleteLibrary = async (criteria) => {
     setLoading(true);
     axios
-      .delete(`http://localhost:5555/books/bulk-delete`, {params: criteria}) //Use patch instead of get -> put ??? 
+      .delete(`http://localhost:5555/books/bulk-delete`, {params: criteria}) 
       .then(() => {
         // setOldBook(response.data.book);
         setLoading(false);
@@ -55,7 +54,7 @@ const DeleteLibrary = () => {
               className = 'border-2 border-gray-500 px-4 py-2 w-full'
             />
           </div>
-          <button className = 'p-2 bg-sky-300 m-8' onClick={handleDeleteLibrary({author, publishYear})}>
+          <button className = 'p-2 bg-sky-300 m-8' onClick={handleDeleteLibrary(publishYear, author)}>
             Delete
           </button>
         </div>
