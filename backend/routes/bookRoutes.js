@@ -104,4 +104,24 @@ router.delete('/:id', async (request, response) => {
     }
 })
 
+router.delete('/bulk-delete', async (request, response) => {
+    const { publishYear, author } = request.query;
+
+    // Construct a query object based on the provided parameters
+    const query = {};
+    if (publishYear) query.publishYear = publishYear;
+    if (author) query.author = author;
+    try {
+        const result = await Book.deleteMany(query);
+        if (result.deletedCount > 0) {
+            response.status(200).send({ message: 'Books deleted successfully', deletedCount: result.deletedCount });
+        } else {
+            response.status(404).send({ message: 'No books found with the given criteria' });
+        }
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({message: error.message});
+    }
+});
+
 export default router;
