@@ -48,9 +48,9 @@ const Home = () => {
         <Link to='/books/create'>
           <MdOutlineAddBox className='text-sky-700 text-3xl' />
         </Link>
-        <Link to='/books/deletelib'>
+        {/* <Link to='/books/deletelib'>
           <MdOutlineDelete className='text-2x1 bg-red-400 text-white'/>
-        </Link>
+        </Link> */}
       </div>
       {loading ? (
         <Spinner />
